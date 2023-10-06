@@ -93,8 +93,20 @@ class Upload
    * Get the upload element as an associative array
    * @return array
    */
-  public function getArray()
+  public function getArray($version = ApiVersion::V1)
   {
+    if($version > ApiVersion::V1) {
+      return [
+        "id"          => $this->uploadId,
+        "folderId"    => $this->folderId,
+        "folderName"  => $this->folderName,
+        "description" => $this->description,
+        "uploadName"  => $this->uploadName,
+        "uploadDate"  => $this->uploadDate,
+        "assignee"    => $this->assignee,
+        "hash"        => $this->hash->getArray()
+      ];
+    }
     return [
       "folderid"    => $this->folderId,
       "foldername"  => $this->folderName,

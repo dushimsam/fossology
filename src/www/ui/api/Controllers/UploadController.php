@@ -26,6 +26,7 @@ use Fossology\Lib\Proxy\UploadBrowseProxy;
 use Fossology\Lib\Proxy\UploadTreeProxy;
 use Fossology\UI\Api\Helper\ResponseHelper;
 use Fossology\UI\Api\Helper\UploadHelper;
+use Fossology\UI\Api\Models\ApiVersion;
 use Fossology\UI\Api\Models\Info;
 use Fossology\UI\Api\Models\InfoType;
 use Fossology\UI\Api\Models\License;
@@ -249,7 +250,7 @@ class UploadController extends RestController
     ];
     list($pages, $uploads) = $this->dbHelper->getUploads(
       $this->restHelper->getUserId(), $this->restHelper->getGroupId(), $limit,
-      $page, $id, $options, $recursive);
+      $page, $id, $options, $recursive, $request->getAttribute('apiVersion'));
     if ($id !== null && ! empty($uploads)) {
       $uploads = $uploads[0];
       $pages = 1;
